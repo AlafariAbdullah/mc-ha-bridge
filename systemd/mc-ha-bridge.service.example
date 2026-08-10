@@ -1,0 +1,26 @@
+# Example systemd user service for running the watcher automatically.
+#
+# Install:
+#   mkdir -p ~/.config/systemd/user
+#   cp mc-ha-bridge.service.example ~/.config/systemd/user/mc-ha-bridge.service
+#   # edit the paths below to match your system
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now mc-ha-bridge.service
+#
+# Check status / logs:
+#   systemctl --user status mc-ha-bridge.service
+#   journalctl --user -u mc-ha-bridge.service -f
+
+[Unit]
+Description=mc-ha-bridge watcher
+After=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/mc-ha-bridge
+ExecStart=%h/.local/bin/mc-ha-bridge watch --config %h/mc-ha-bridge/config.yaml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,32 @@
+# Copy this file to config.yaml and fill in your own values.
+
+minecraft:
+  # Path to the world save folder (the datapack is written inside here).
+  save_path: ~/.local/share/PrismLauncher/instances/26.2/minecraft/saves/CurrentWorld
+
+  # Path to the live latest.log for the instance you're playing.
+  # Usually at the instance level, not inside the save folder.
+  log_path: ~/.local/share/PrismLauncher/instances/26.2/minecraft/logs/latest.log
+
+home_assistant:
+  # Base URL of your Home Assistant instance, no trailing slash.
+  base_url: http://192.168.1.175:8123
+
+# One entry per physical button. `name` is used in the datapack's log
+# output and has no meaning to Minecraft itself — pick anything readable.
+# `coords` is the button's [x, y, z] block position (check via F3 in-game).
+# `webhook_id` must match the webhook trigger ID you set in your Home
+# Assistant automation.
+buttons:
+  - name: hidden
+    coords: [-133, 128, -795]
+    webhook_id: mc_hidden
+  - name: spots2
+    coords: [-131, 128, -795]
+    webhook_id: mc_spots2
+  - name: spots4
+    coords: [-129, 128, -795]
+    webhook_id: mc_spots4
+  - name: changing
+    coords: [-127, 128, -795]
+    webhook_id: mc_changing

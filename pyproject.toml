@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mc-ha-bridge"
+version = "0.1.0"
+description = "Trigger Home Assistant automations from buttons pressed in a cheats-off vanilla Minecraft world"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+authors = [
+  { name = "AAA" }
+]
+keywords = ["minecraft", "home-assistant", "datapack", "iot", "smart-home"]
+dependencies = [
+  "PyYAML>=6.0",
+  "requests>=2.28",
+]
+
+[project.urls]
+Homepage = "https://github.com/YOUR_USERNAME/mc-ha-bridge"
+Issues = "https://github.com/YOUR_USERNAME/mc-ha-bridge/issues"
+
+[project.scripts]
+mc-ha-bridge = "mc_ha_bridge.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mc_ha_bridge = ["datapack_template/*"]
