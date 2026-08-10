@@ -29,13 +29,10 @@ so this uses a two-part bridge:
 - A vanilla Minecraft world (singleplayer is fine) with cheats off
 
 ## Install
-
+From inside the folder (From Source):
 ```bash
-pip install mc-ha-bridge
+pip install -e .
 ```
-
-(Or from source: `git clone` this repo, then `pip install -e .` from the
-repo root.)
 
 ## Setup
 
