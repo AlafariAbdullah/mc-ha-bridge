@@ -154,4 +154,4 @@ watcher automatically on login, instead of manually in a terminal.
 
 ## License
 
-MIT — see `LICENSE`.
+MIT - see `LICENSE`.
