@@ -2,7 +2,7 @@
 
 Trigger Home Assistant automations from physical buttons/levers pressed in a
 **vanilla, cheats-off** Minecraft world. No mods, no command blocks, no
-server plugins — just a datapack (which loads without cheats being enabled)
+server plugins. Just a datapack (which loads without cheats being enabled)
 and a small watcher process outside the game.
 
 ## How it works
@@ -13,7 +13,7 @@ so this uses a two-part bridge:
 1. A **datapack** watches your in-game buttons every tick and, on each
    press, writes a line like `BUTTON:hidden:PRESSED` into the game's log
    (`latest.log`) via `/say`. Datapacks run automatically when a world
-   loads and are unaffected by the "Allow Cheats" world setting — only
+   loads and are unaffected by the "Allow Cheats" world setting. Only
    *player-typed* commands are gated by that.
 2. A small **watcher** process (this tool) tails that log file on your
    computer, and fires a Home Assistant webhook for each press.
@@ -65,7 +65,7 @@ buttons:
 
 `save_path` and `log_path` support `~`. `log_path` is usually at the
 *instance* level (shared across all worlds in that instance), not inside
-the save folder itself — check your launcher if unsure.
+the save folder itself. Check your launcher if unsure.
 
 ### 3. Generate and install the datapack
 
@@ -75,14 +75,14 @@ mc-ha-bridge init --config config.yaml
 
 This writes a complete datapack into
 `<save_path>/datapacks/mc_ha_bridge/`. Fully re-run this any time you
-change your config — it overwrites the generated files cleanly.
+change your config. It overwrites the generated files cleanly.
 
 Then, in-game: return to the title screen and re-enter the world so the
 datapack loads. Press a button and confirm you see e.g. `BUTTON:hidden:PRESSED`
 appear in chat.
 
 If your Minecraft version needs a different `pack_format`, edit the
-generated `pack.mcmeta` — see the
+generated `pack.mcmeta`. See the
 [Minecraft Wiki's Data Pack format table](https://minecraft.wiki/w/Data_pack#Pack_format)
 for your version.
 
@@ -90,8 +90,9 @@ for your version.
 
 For each button, you need a webhook trigger in HA whose ID matches the
 `webhook_id` in your config. The simplest approach is one automation with
-one trigger per button, routed with `choose:`. Example for two buttons —
-extend the pattern for the rest of yours:
+one trigger per button, routed with `choose:`. Example for two buttons:
+
+extend the pattern for the rest of yours
 
 ```yaml
 alias: mc-ha-bridge buttons
@@ -132,7 +133,7 @@ Edit in YAML.
 mc-ha-bridge watch --config config.yaml
 ```
 
-Press your buttons in-game — you should see confirmation in the terminal
+Press your buttons in-game -> you should see confirmation in the terminal
 and your Home Assistant devices respond.
 
 ### 6. (Optional) Run it as a background service
@@ -142,13 +143,13 @@ watcher automatically on login, instead of manually in a terminal.
 
 ## Troubleshooting
 
-- **Nothing shows up in chat when I press a button** — double check the
+- **Nothing shows up in chat when I press a button** -> double check the
   coordinates in the generated `tick.mcfunction`, and that you reloaded
   the world after running `init`.
-- **Chat shows the press but the terminal shows nothing** — check
+- **Chat shows the press but the terminal shows nothing** -> check
   `log_path` in your config points at the *live* `latest.log` for the
   instance you're actually playing.
-- **Terminal shows the webhook fired but HA doesn't respond** — check the
+- **Terminal shows the webhook fired but HA doesn't respond** -> check the
   `webhook_id` matches exactly between your config and the HA automation,
   and that `base_url` is reachable from the machine running the watcher.
 
